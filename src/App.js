@@ -5,27 +5,21 @@ import { ForceGraph2D, ForceGraph3D, ForceGraphVR } from 'react-force-graph';
 import SpriteText from 'three-spritetext';
 import data from './json_generator/data';
 
-const distance = 1000;
-
 class App extends Component {
     constructor(props) {
         super(props);
+        this.colors = [
+            '#b8b8b8',
+            '#00ffb3',
+            '#0084ff',
+            'rgba(127, 0, 255, 0.62, 0.5)'
+        ];
+        this.widths = [0, 1, 1, 1, 2, 2, 2, 2, 2, 5, 5];
 
-        this.state = {
-            data: {}
-        };
     }
 
     componentDidMount() {
-        this.fg.cameraPosition({ x: distance });
-
-        let angle = 0;
-        setInterval(() => {
-            this.fg.cameraPosition({
-                x: distance * Math.sin(angle),
-            });
-            angle += Math.PI / 300;
-        }, 10);
+        this.fg.zoom(5);
     }
 
     render() {
@@ -42,10 +36,10 @@ class App extends Component {
                   sprite.textHeight = 1;
                   return sprite;
               }}
-              linkLabel={"value"}
-              linkWidth={node => node.value}
-              linkAutoColorBy={"value"}
-              linkDirectionalArrowLength={node => node.value * 2}
+              linkLabel={link => link.value + ', ' + Math.floor(link.value / 3)}
+              linkWidth={link => this.widths[link.value]}
+              linkColor={link => this.colors[Math.floor(link.value / 3)]}
+              linkDirectionalArrowLength={link => link.value * 0.5}
               linkDirectionalArrowRelPos={0.5}
               // linkDirectionalParticles={3}
               linkCurvature={0.5}
