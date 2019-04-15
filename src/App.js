@@ -68,7 +68,7 @@ class App extends Component {
               linkDirectionalArrowLength={link => this.widths[link.value]}
               linkDirectionalArrowRelPos={.5}
               // linkDirectionalParticles={3}
-              linkCurvature={1}
+              linkCurvature={0.7}
               cameraPosition={{x: 1000}}
           />
       );
