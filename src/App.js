@@ -24,9 +24,10 @@ class App extends Component {
             '162, 132, 94',
 
         ];
-        this.widths = [0, 1, 1, 1, 2, 2, 2, 2, 2, 5, 5];
+        this.widths = [0, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 4, 6];
         this.transparencies = [0, .07, .07, .07, .1, .1, .1, .1, .1, .3, .3];
-
+        this.particles = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2];
+        this.particleSpeeds = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0.001, 0.002];
     }
 
     componentDidMount() {
@@ -70,6 +71,9 @@ class App extends Component {
               // linkDirectionalParticles={3}
               linkCurvature={0.7}
               cameraPosition={{x: 1000}}
+              linkDirectionalParticles={link => this.particles[link.value]}
+              linkDirectionalParticleSpeed={link => this.particleSpeeds[link.value]}
+              linkDirectionalParticleWidth={1.5}
           />
       );
   }
