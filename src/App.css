@@ -1,33 +1,60 @@
-.App {
-  text-align: center;
+.describer {
+  display: grid;
+  grid-template-areas: "source-vertex source-id value" "target-vertex target-id value";
+  grid-template-columns: 40px max-content max-content;
+  grid-column-gap: 0;
+  grid-row-gap: 8px;
+  margin: 5px 0;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+.describer .arrow {
+  z-index: 10;
+  position: absolute;
+  transform: scale(0.6) translate(-5px, 17px);
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.describer > .source-vertex, .describer > .target-vertex {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+}
+.describer > .source-vertex {
+  grid-area: source-vertex;
+}
+.describer > .source-vertex > .vertex {
+  z-index: 15;
+}
+.describer > .target-vertex {
+  grid-area: target-vertex;
+  z-index: 5;
+}
+.describer > .source-vertex > .vertex, .describer > .target-vertex > .vertex {
+  width: 15px;
+  height: 15px;
+  border-radius: 100%;
+  background: white;
+}
+.describer > .source, .describer > .target {
+  font-size: 14pt;
+}
+.describer > .source {
+  grid-area: source-id;
+}
+.describer > .target {
+  grid-area: target-id;
+}
+.describer > .value {
+  grid-area: value;
+  font-size: 24pt;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
+}
+.describer > .value > .value-of {
+  position: relative;
+  top: -6px;
+  margin-left: 5px;
+  margin-right: 10px;
+  font-size: 9pt;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/*# sourceMappingURL=App.css.map */

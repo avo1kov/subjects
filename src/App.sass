@@ -1,0 +1,61 @@
+.describer
+  display: grid
+  grid-template-areas: "source-vertex source-id value" "target-vertex target-id value"
+  grid-template-columns: 40px max-content max-content
+  grid-column-gap: 0
+  grid-row-gap: 8px
+  margin: 5px 0
+
+  .arrow
+    z-index: 10
+    position: absolute
+    transform: scale(0.6) translate(-5px, 17px)
+
+  >.source-vertex, >.target-vertex
+    display: flex
+    justify-content: center
+    align-items: center
+
+  >.source-vertex
+    grid-area: source-vertex
+
+    >.vertex
+      z-index: 15
+
+  >.target-vertex
+    grid-area: target-vertex
+
+    >.vertex
+    z-index: 5
+
+  >.source-vertex > .vertex, >.target-vertex > .vertex
+    width: 15px
+    height: 15px
+    border-radius: 100%
+    background: white
+
+  >.source, >.target
+    font-size: 14pt
+
+  >.source
+    grid-area: source-id
+
+  >.target
+    grid-area: target-id
+
+  >.value
+    grid-area: value
+    font-size: 24pt
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    margin-left: 15px
+
+    >.value-of
+      position: relative
+      top: -6px
+      margin-left: 5px
+      margin-right: 10px
+      font-size: 9pt
