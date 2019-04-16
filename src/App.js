@@ -5,7 +5,6 @@ import arrowPNG from './arrow.png'
 import { ForceGraph2D, ForceGraph3D, ForceGraphVR } from 'react-force-graph';
 // import SpriteText from 'three-spritetext';
 import data from './json_generator/data';
-import LinkDescriber from "./LinkDescriber";
 
 class App extends Component {
     constructor(props) {
@@ -43,7 +42,7 @@ class App extends Component {
             '227, 208, 184',
         ];
 
-        this.widths = [0, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 4, 6];
+        this.widths = [0, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 4, 4.5, 5];
         this.transparencies = [0, .07, .07, .07, .1, .1, .1, .1, .1, .3, .3];
         this.particles = [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2];
         this.particleSpeeds = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0.001, 0.002];
@@ -75,6 +74,7 @@ class App extends Component {
           <div className="App">
               <ForceGraph2D
                   ref={el => { this.fg = el; }}
+                  onNode
                   graphData={data}
                   nodeColor={node => `rgb(${this.groupColors[node.group]})`}
                   nodeRelSize={1.3}
