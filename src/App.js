@@ -5,6 +5,7 @@ import arrowPNG from './arrow.png'
 import { ForceGraph2D, ForceGraph3D, ForceGraphVR } from 'react-force-graph';
 // import SpriteText from 'three-spritetext';
 import data from './json_generator/data';
+import * as THREE from 'three';
 
 class App extends Component {
     constructor(props) {
@@ -71,11 +72,26 @@ class App extends Component {
 
     render() {
       return (
-          <div className="App">
               <ForceGraph2D
                   ref={el => { this.fg = el; }}
                   onNode
                   graphData={data}
+                  nodeThreeObject={({ id }) => new THREE.Mesh(
+                      [
+                          new THREE.BoxGeometry(Math.random() * 20, Math.random() * 20, Math.random() * 20),
+                          new THREE.ConeGeometry(Math.random() * 10, Math.random() * 20),
+                          new THREE.CylinderGeometry(Math.random() * 10, Math.random() * 10, Math.random() * 20),
+                          new THREE.DodecahedronGeometry(Math.random() * 10),
+                          new THREE.SphereGeometry(Math.random() * 10),
+                          new THREE.TorusGeometry(Math.random() * 10, Math.random() * 2),
+                          new THREE.TorusKnotGeometry(Math.random() * 10, Math.random() * 2)
+                      ][id%7],
+                      new THREE.MeshLambertMaterial({
+                          color: Math.round(Math.random() * Math.pow(2, 24)),
+                          transparent: true,
+                          opacity: 0.75
+                      })
+                  )}
                   nodeColor={node => `rgb(${this.groupColors[node.group]})`}
                   nodeRelSize={1.3}
                   nodeCanvasObject={(node, ctx, globalScale) => {
@@ -103,7 +119,7 @@ class App extends Component {
                       return `<div class="describer">
                                 <div class="source-vertex">
                                     <div class="vertex" style="background: rgb(${this.darkGroupColors[link.source.group]})"></div>
-                                    <img src=${arrowPNG} alt="arrow" class="arrow">  
+                                    <img src=${arrowPNG} alt="arrow" class="arrow">
                                 </div>
                                 <div class="target-vertex">
                                     <div class="vertex" style="background: rgb(${this.darkGroupColors[link.target.group]})"></div>
@@ -114,18 +130,21 @@ class App extends Component {
                             </div>`;
                   }}
                   linkWidth={link => this.widths[link.value]}
-                  // linkColor={link => this.linkColors[Math.floor(link.value / 3)]}
+
+                     // linkColor={link => this.linkColors[Math.floor(link.value / 3)]}
+
                   linkColor={link => `rgba(${this.groupColors[link.source.group]}, ${this.transparencies[link.value]})`}
                   linkDirectionalArrowLength={link => this.widths[link.value]}
                   linkDirectionalArrowRelPos={.5}
-                  // linkDirectionalParticles={3}
+
+                     // linkDirectionalParticles={3}
+
                   linkCurvature={0.7}
                   cameraPosition={{x: 1000}}
                   linkDirectionalParticles={link => this.particles[link.value]}
                   linkDirectionalParticleSpeed={link => this.particleSpeeds[link.value]}
                   linkDirectionalParticleWidth={link => this.particleWidths[link.value]}
               />
-          </div>
       );
   }
 }
